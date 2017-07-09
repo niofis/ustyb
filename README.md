@@ -1,5 +1,4 @@
-# USTYB
-## Upload Stuff To Your Brain
+# USTYB - Upload Stuff To Your Brain
 
 This software lets you get better at studying and learning. Uses the flashcards method ([guide](https://fluent-forever.com/create-better-flashcards/)) with the [SM2](https://www.supermemo.com/english/ol/sm2.htm) algorithm and a RESTful API to interact with them.
 
