@@ -1,0 +1,32 @@
+{
+  "name": "ustyb",
+  "version": "0.1.0",
+  "description": "Upload Stuff To Your Brain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niofis/ustyb.git"
+  },
+  "author": "niofis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niofis/ustyb/issues"
+  },
+  "homepage": "https://github.com/niofis/ustyb#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "log4js": "^2.3.1",
+    "lokijs": "^1.5.0",
+    "morgan": "^1.8.2",
+    "n": "^2.1.8",
+    "nedb": "^1.8.0",
+    "nosql": "^5.0.3",
+    "sqlite3": "^3.1.8"
+  }
+}
