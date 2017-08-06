@@ -3,9 +3,9 @@
 const express = require("express");
 const router = express.Router();
 const log = require("log4js").getLogger("v1/users");
-const errors = require("../errors");
+const errors = require("../tools/errors");
 const user = require("../models").user;
-const db = require("../database");
+const db = require("../tools/database");
 
 module.exports = router;
 

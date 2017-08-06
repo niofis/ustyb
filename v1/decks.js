@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const log = require("log4js").getLogger("v1/decks");
-const errors = require("../errors");
+const errors = require("../tools/errors");
 
 module.exports = router;
 
