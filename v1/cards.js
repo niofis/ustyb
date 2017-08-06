@@ -23,6 +23,10 @@ router.get("/due", (req, res) => {
   errors.notImplemented(res);
 });
 
+router.get("/due/next", (req, res) => {
+  errors.notImplemented(res);
+});
+
 router.get("/:id", async (req, res) => {
   try {
     var card = await card.findById(db, req.user.id, req.deck.id, req.params.id);

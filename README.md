@@ -69,11 +69,11 @@ example:
 
 #### v1/user/id/decks/id/cards/due
 
-*GET* - Retrieves the ids of cards due to the next study session
+*GET* - Retrieves the cards due to the next study session
 
 #### v1/user/id/decks/id/cards/due/next
 
-*GET* - Retrieves the id of the top card of the due queue
+*GET* - Retrieves the top card of the due queue
 
 #### v1/user/id/decks/id/cards/id
 
@@ -87,7 +87,7 @@ example:
   "nextStudy": <number> //Unix timestamp
   "timesStudied": <number>
   "repetition": <number> //SM2 Inter-repetition interval (days)
-  "easiness": <number> //SM2 easiness factor, cannot go lower than 1.3
+  "easiness": <number> //SM2 easiness factor, can not go lower than 1.3
   "quality": <number> //SM2 quality of the recall for the last study session 0 (totally forgot) - 5 (extremely easy to recall)
 }
 ```
