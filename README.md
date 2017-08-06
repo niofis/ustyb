@@ -6,9 +6,6 @@ This software lets you get better at studying and learning. Uses the flashcards 
 
 Currently the API is in version 1, so all endpoints are prepended with v1. Methods not described are not allowed.
 
-#### v1/user/id/
-API base address, nothing can be done here.
-
 #### v1/user/id/profile
 *GET* - Retrieves user profile and user preferences
 
@@ -28,16 +25,20 @@ example:
 
 example:
 ```javascript
-{
-  "english": {
+[
+  {
+    "id": "123",
+    "name": "english",
     "cards": 5, //Total number of cards
     "due": 1, //Number of cards due to be studied on next session
     "lastStudied": 1483254000, //Unix timestamp
   },
-  "spanish": {
+  {
+    "id": "124",
+    "name": "spanish"
     ...
   }
-}
+]
 ```
 #### v1/user/id/decks/id
 
@@ -47,7 +48,7 @@ example:
 
 #### v1/user/id/decks/id/cards
 
-*GET* - Retrieves the ids of all the cards in this deck
+*GET* - Retrieves all the cards in this deck
 
 example:
 ```javascript

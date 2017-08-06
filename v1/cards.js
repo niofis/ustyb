@@ -8,9 +8,44 @@ const db = require("../tools/database");
 
 module.exports = router;
 
-router.get("/", (req, res) => {
-  //retrieve all cards for current deck
-  res.json([]);
+router.get("/", async (req, res) => {
+  try {
+    //retrieve all cards for current deck
+    var cards = await card.all(db, req.user.id, req.deck.id);
+    res.json(cards);
+  } catch (ex) {
+    log.error(ex);
+    error.internalError(res);
+  }
 });
 
-router.use("/:id/cards", loadDeck, require("./cards"));
+router.get("/due", (req, res) => {
+  errors.notImplemented(res);
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    var card = await card.findById(db, req.user.id, req.deck.id, req.params.id);
+    res.json(card);
+  } catch (ex) {
+    log.error(ex);
+    errors.internalError(res);
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    var card = await card.insert(db, req.user.id, req.deck.id, req.body);
+    res.json(card);
+  } catch(ex) {
+    if (ex.fail) {
+      return errors.badRequest(res, ex.error);
+    }
+    log.error(ex);
+    errors.internalError(res);
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  errors.notImplemented(res);
+});

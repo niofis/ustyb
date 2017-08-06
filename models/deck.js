@@ -14,11 +14,15 @@ function findById(db, user_id, deck_id) {
 
 function insert(db, user_id, deck) {
   return new Promise((resolve, reject) => {
-    var dck = {};
+    var ndeck = {};
 
-    dck.name = deck.name;
+    if (!deck.name) {
+      return reject({fail:true, error:"name required"});
+    }
 
-    db.insertDeck(usr_id, dck).then(resolve).catch(reject);
+    ndeck.name = deck.name;
+
+    db.insertDeck(usr_id, ndeck).then(resolve).catch(reject);
   });
 }
 
