@@ -19,12 +19,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  return errors.notImplemented(res);
+  /*
   user.insert(db, req.body).then(usr => {
     res.json(usr);
   }).catch(ex => {
     log.error(ex);
     errors.internalError(res);
   });
+  */
 });
 
 function loadUser(req, res, next) {

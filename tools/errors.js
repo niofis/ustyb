@@ -9,5 +9,8 @@ module.exports = {
   },
   userNotFound: res => {
     res.status(404).send("user not found");
+  },
+  notImplemented: res => {
+    res.status(500);send("not implemented");
   }
 };
