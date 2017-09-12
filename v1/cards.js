@@ -22,12 +22,16 @@ router.get("/", async (req, res) => {
 
 function dueCards(user_id, deck_id) {
   return new Promise(async (resolve, reject) => {
-    var cards = await card.all(db, user_id, deck_id);
-    var now = moment().unix();
-    var due = cards.filter(c => {
-      return (now - c.nextStudy) > 0;
-    });
-    resolve(due);
+    try {
+      var cards = await card.all(db, user_id, deck_id);
+      var now = moment().unix();
+      var due = cards.filter(c => {
+        return (now - c.nextStudy) > 0;
+      });
+      resolve(due);
+    } catch (ex) {
+      reject(ex);
+    }
   });
 }
 
@@ -43,7 +47,7 @@ router.get("/due", async (req, res) => {
 
 router.get("/due/next", async (req, res) => {
   try {
-    var due = await dueCards(req.user.id, req.deckid);
+    var due = await dueCards(req.user.id, req.deck.id);
     var id = Math.floor(Math.random() * due.length);
     var next = due[id];
     res.json(next);
