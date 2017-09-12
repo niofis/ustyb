@@ -14,7 +14,7 @@ function findUserWithId(id) {
   return new Promise((resolve, reject) => {
     db.ref(id).child("profile").once("value", snp => {
       var user = snp.val();
-      resolve(usr);
+      resolve(user);
     });
   });
 }
@@ -48,8 +48,9 @@ function findDeckWithId(user_id, deck_id) {
 function insertDeck(usr_id, deck) {
   return new Promise((resolve, reject) => {
     var ref = db.ref(usr_id).child("decks");
-    var id = ref.push();
+    var id = ref.push().key;
     deck.id = id;
+    console.log(deck);
     ref.child(id).set(deck, () => {
       resolve(deck);
     });
@@ -61,7 +62,7 @@ function getAllCardsForDeck(usr_id, deck_id) {
     db.ref(usr_id).child("cards").child(deck_id).once("value", snp => {
       var data = snp.val();
       if (!data) {
-        resolve([]);
+        return resolve([]);
       }
       var cards = Object.keys(data).map(k => {
         var card = data[k];
@@ -84,9 +85,18 @@ function findCardWithId(usr_id, deck_id, card_id) {
 function insertCard(usr_id, deck_id, card) {
   return new Promise((resolve, reject) => {
     var ref = db.ref(usr_id).child("cards").child(deck_id);
-    var id = ref.push();
+    var id = ref.push().key;
     card.id = id;
     ref.child(id).set(card, () => {
+      resolve(card);
+    });
+  });
+}
+
+function updateCard(usr_id, deck_id, card_id, card) {
+  return new Promise((resolve, reject) => {
+    var ref = db.ref(usr_id).child("cards").child(deck_id).child(card_id);
+    ref.update(card, () => {
       resolve(card);
     });
   });
@@ -97,6 +107,7 @@ module.exports = {
   getAllDecksForUser,
   findDeckWithId,
   getAllCardsForDeck,
+  insertDeck,
   findCardWithId,
   insertCard
 };

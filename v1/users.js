@@ -25,10 +25,10 @@ router.post("/", (req, res) => {
 function loadUser(req, res, next) {
   var id = req.params.id;
   user.findById(db, id).then(usr => {
-    if (!usr) {
-      return errors.userNotFound(res);
-    }
-    req.user = usr;
+    //if (!usr) {
+    //  return errors.userNotFound(res);
+    //}
+    req.user = usr || {id};
     next();
   }).catch(ex => {
     log.error(ex);

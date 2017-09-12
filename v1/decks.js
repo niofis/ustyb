@@ -11,7 +11,7 @@ module.exports = router;
 router.get("/",async (req, res) => {
   try {
     //retrieve all decks for current user
-    var decks = await decl.all(db.req.user.id);
+    var decks = await deck.all(db, req.user.id);
     res.json(decks);
   } catch (ex) {
     log.error(ex);
@@ -19,10 +19,20 @@ router.get("/",async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    var dk = await deck.findById(db, req.user.id, req.params.id);
+    res.json(dk);
+  } catch (ex) {
+    log.error(ex);
+    errors.internalError(res);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
-    var deck = await deck.insert(db, req.user.id, req.body);
-    res.json(deck);
+    var ndeck = await deck.insert(db, req.user.id, req.body);
+    res.json(ndeck);
   } catch (ex) {
     if (ex.fail) {
       return errors.badRequest(res, ex.error);
@@ -43,11 +53,11 @@ router.patch("/:id", (req, res) => {
 async function loadDeck(req, res, next) {
   try {
     var deck_id = req.params.id;
-    var deck = await deck.findById(db, req.user.id, deck_id);
-    if (!deck) {
+    var dk = await deck.findById(db, req.user.id, deck_id);
+    if (!dk) {
       return errors.notFound(res);
     }
-    req.deck = deck;
+    req.deck = dk;
     next();
   } catch (ex) {
     log.error(ex);

@@ -2,7 +2,7 @@
 
 function all(db, user_id) {
   return new Promise((resolve, reject) => {
-    db.getAllDecksForUser(db, user_id).then(resolve).catch(reject);
+    db.getAllDecksForUser(user_id).then(resolve).catch(reject);
   });
 }
 
@@ -22,7 +22,7 @@ function insert(db, user_id, deck) {
 
     ndeck.name = deck.name;
 
-    db.insertDeck(usr_id, ndeck).then(resolve).catch(reject);
+    db.insertDeck(user_id, ndeck).then(resolve).catch(reject);
   });
 }
 
