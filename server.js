@@ -4,12 +4,14 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const compress = require("compression");
+const cors = require("cors");
 const log4js = require('log4js');
 const log = log4js.getLogger();
 log.level = 'debug';
 
 function start() {
   var app = express();
+  app.use(cors());
   app.use(compress());
   app.use(logger("dev"));
   app.use(bodyParser.json({limit: "500mb"}));

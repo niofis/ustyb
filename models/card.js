@@ -46,7 +46,7 @@ function answer(db, user_id, deck_id, card_id, res_qlty) {
       card.timesStudied++;
 
 
-      if (req_qlty < 3) {
+      if (res_qlty < 3) {
         card.repetition = 0;
       }
       
@@ -61,14 +61,14 @@ function answer(db, user_id, deck_id, card_id, res_qlty) {
       }
       
       
-      card.easiness = card.easiness + (0.1  (5 - res_qlty) * (0.08 + (5 - res_qlty) * 0.02));
+      card.easiness = card.easiness + (0.1 - (5 - res_qlty) * (0.08 + (5 - res_qlty) * 0.02));
       if (card.easiness < 1.3) {
         card.easiness = 1.3;
       }
 
       card.quality = res_qlty;
       
-      if (req_qlty < 4) {
+      if (res_qlty < 4) {
         card.nextStudy = moment().add(10, "minutes").unix();
       } else {
         card.nextStudy = moment().add(card.interval, "days").unix();

@@ -109,5 +109,6 @@ module.exports = {
   getAllCardsForDeck,
   insertDeck,
   findCardWithId,
-  insertCard
+  insertCard,
+  updateCard
 };

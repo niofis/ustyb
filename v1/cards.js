@@ -81,7 +81,17 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id/answer", async (req, res) => {
-  errors.notImplemented(res);
+  try {
+    console.log(req.body);
+    var cd = await card.answer(db, req.user.id, req.deck.id, req.params.id, req.body.difficulty);
+    res.json(cd);
+  } catch(ex) {
+    if (ex.fail) {
+      return errors.badRequest(res, ex.error);
+    }
+    log.error(ex);
+    errors.internalError(res);
+  }
 });
 
 router.delete("/:id", (req, res) => {
